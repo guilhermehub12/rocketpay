@@ -29,6 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - JavaScript e JSON
 - [Node e NPM](https://nodejs.org/)
 - [Vite](https://vitejs.dev/)
+- [Regex](/public/RegEx.md)
 - [iMask](https://imask.js.org)
 
 ## 💻 Projeto
