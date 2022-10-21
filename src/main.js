@@ -9,6 +9,13 @@ function setCardType(type) {
   const colors = {
     visa: ['#436D99', '#2D57F2'],
     mastercard: ['#DF6F29', '#C69347'],
+    americanExpress: [],
+    discover: [],
+    diners: [],
+    jcb15: [],
+    jcb: [],
+    maestro: [],
+    unionpay: [],
     default: ['black', 'gray']
   }
 
@@ -120,11 +127,6 @@ const cardHolderPattern = {
 
 const cardHolderMasked = IMask(cardHolder, cardHolderPattern);
 
-const addButton = document.querySelector('#add-card')
-addButton.addEventListener("click", () => {
-   alert('Cartão Adicionado!')
-})
-
 document.querySelector('form').addEventListener("submit", (event) => {
   event.preventDefault()
 })
@@ -154,3 +156,26 @@ securityCodeMasked.on('accept', () => {
 
   ccSecurityCode.innerText = securityCodeMasked.value.length === 0 ? '123' : securityCodeMasked.value
 })
+
+const addButton = document.querySelector('#add-card')
+addButton.addEventListener("click", () => {
+  notify();
+})
+
+function notify() {
+  if (!("Notification" in window)) {
+    alert("Navegador não suporta notificação na área de trabalho");
+  } else if (Notification.permission === "granted") {
+    notification();
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        notification();
+      }
+    });
+  }
+}
+
+function notification() {
+  new Notification(`✅ | O seu cartão ${cardNumberMasked.masked.currentMask.cardtype} foi adicionado com sucesso!`);
+}
