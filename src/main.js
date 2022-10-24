@@ -7,15 +7,15 @@ const ccLogo = document.querySelector('.cc-logo span:nth-child(2) img');
 
 function setCardType(type) {
   const colors = {
-    visa: ['#436D99', '#2D57F2'],
-    mastercard: ['#DF6F29', '#C69347'],
-    amex: [''],
-    discover: [''],
-    diners: [''],
-    jcb15: [''],
-    jcb: [''],
-    maestro: [''],
-    unionpay: [''],
+    visa: ['#17283A', '#D9BB7D'],
+    mastercard: ['#E3001A', '#EF991B'],
+    amex: ['#D6E5DE', '#ACBBB2'],
+    discover: ['#F7A027', '#82310F'],
+    diners: ['#A01111', '#270B0E'],
+    jcb15: ['#DEB758', '#1C0E0B'],
+    jcb: ['#1C0E0B', '#DEB758'],
+    maestro: ['#8EFCEF', '#B81532'],
+    unionpay: ['#8CFEEF', '#B83512'],
     default: ['black', 'gray']
   }
 
