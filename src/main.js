@@ -9,18 +9,18 @@ function setCardType(type) {
   const colors = {
     visa: ['#436D99', '#2D57F2'],
     mastercard: ['#DF6F29', '#C69347'],
-    americanExpress: [],
-    discover: [],
-    diners: [],
-    jcb15: [],
-    jcb: [],
-    maestro: [],
-    unionpay: [],
+    amex: [''],
+    discover: [''],
+    diners: [''],
+    jcb15: [''],
+    jcb: [''],
+    maestro: [''],
+    unionpay: [''],
     default: ['black', 'gray']
   }
 
   ccBgColor01.setAttribute('fill', colors[type][0])
-  ccBgColor02.setAttribute('fill', colors[type][2])
+  ccBgColor02.setAttribute('fill', colors[type][1])
   ccLogo.setAttribute('src', `cc-${type}.svg`)
 }
 
@@ -68,7 +68,7 @@ const cardNumberPattern = {
     {
       mask: '0000 000000 00000',
       regex: /^3[47]\d{0,13}/,
-      cardtype: 'american express'
+      cardtype: 'amex'
     },
     {
       mask: '0000 0000 0000 0000',
@@ -179,3 +179,12 @@ function notify() {
 function notification() {
   new Notification(`✅ | O seu cartão ${cardNumberMasked.masked.currentMask.cardtype} foi adicionado com sucesso!`);
 }
+
+// suggests 
+cardNumber.addEventListener("focus", () => {
+  document.querySelector(".suggests").style.display = "block"
+})
+
+cardNumber.addEventListener("focusout", () => {
+  document.querySelector(".suggests").style.display = "none"
+})
