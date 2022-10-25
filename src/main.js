@@ -159,7 +159,14 @@ securityCodeMasked.on('accept', () => {
 
 const addButton = document.querySelector('#add-card')
 addButton.addEventListener("click", () => {
-  notify();
+  if (cardHolderMasked.value.length &&
+    cardNumberMasked.value.length &&
+    expirationDateMasked.value.length &&
+    securityCodeMasked.value.length === ""){
+      return alert("Não deixe nenhum campo vazio!!")
+    } else {
+      return notify();
+    }
 })
 
 function notify() {
