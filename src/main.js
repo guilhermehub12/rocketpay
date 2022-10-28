@@ -46,7 +46,7 @@ const expirationDatePattern = {
       mask: IMask.MaskedRange,
       from: 1,
       to: 12,
-    },    
+    },
   },
 }
 
@@ -105,9 +105,9 @@ const cardNumberPattern = {
       cardtype: "default",
     },
   ],
-  dispatch: function(appended, dynamicMasked) {
+  dispatch: function (appended, dynamicMasked) {
     const number = (dynamicMasked.value + appended).replace(/\D/g, "");
-    const foundMask = dynamicMasked.compiledMasks.find(function (item){
+    const foundMask = dynamicMasked.compiledMasks.find(function (item) {
       return number.match(item.regex);
     })
     return foundMask;
@@ -133,7 +133,7 @@ document.querySelector('form').addEventListener("submit", (event) => {
 
 cardHolderMasked.on('accept', () => {
   const ccHolder = document.querySelector('.cc-holder .value')
-  
+
   ccHolder.innerText = cardHolderMasked.value.length === 0 ? 'FULANO DA SILVA' : cardHolderMasked.value
 })
 
@@ -142,7 +142,7 @@ cardNumberMasked.on('accept', () => {
   setCardType(cardType)
 
   const ccNumber = document.querySelector('.cc-number')
-  ccNumber.innerText = cardNumberMasked.value.length === 0 ? '1234 5678 9012 3456' : cardNumberMasked.value  
+  ccNumber.innerText = cardNumberMasked.value.length === 0 ? '1234 5678 9012 3456' : cardNumberMasked.value
 })
 
 expirationDateMasked.on('accept', () => {
@@ -159,14 +159,16 @@ securityCodeMasked.on('accept', () => {
 
 const addButton = document.querySelector('#add-card')
 addButton.addEventListener("click", () => {
-  if (cardHolderMasked.value.length &&
-    cardNumberMasked.value.length &&
-    expirationDateMasked.value.length &&
-    securityCodeMasked.value.length === ""){
-      return alert("Não deixe nenhum campo vazio!!")
-    } else {
-      return notify();
-    }
+  return notify();
+})
+
+const delButton = document.querySelector('#del-card')
+delButton.addEventListener("click", () => {
+  cardNumber.value = '';
+  cardHolder.value = '';
+  expirationDate.value = '';
+  securityCode.value = '';
+  new Notification('✅ | Cartão deletado com sucesso!')
 })
 
 function notify() {
@@ -184,7 +186,14 @@ function notify() {
 }
 
 function notification() {
-  new Notification(`✅ | O seu cartão ${cardNumberMasked.masked.currentMask.cardtype} foi adicionado com sucesso!`);
+  if (cardNumberMasked.masked.currentMask.cardtype === 'default' ||
+    cardHolder.value === '' ||
+    expirationDate.value === '' ||
+    securityCode.value === '') {
+    new Notification(`❌ | Cartão inválido ou campo incompleto`);
+  } else {
+    new Notification(`✅ | O seu cartão ${cardNumberMasked.masked.currentMask.cardtype} foi adicionado com sucesso!`);
+  }
 }
 
 // suggests 
