@@ -120,7 +120,7 @@ const cardHolder = document.querySelector('#card-holder')
 const cardHolderPattern = {
   mask: [
     {
-      mask: /^[A-zÀ-ú '´]+$/
+      mask: /^[A-zÀ-ú '~´]+$/
     }
   ]
 }
